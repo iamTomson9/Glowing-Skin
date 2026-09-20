@@ -11,6 +11,14 @@ Glowing Skin is governed by a CTO-led delivery process focused on a low-cost PWA
 
 ## Project Governance
 
+- [Project Context](docs/PROJECT_CONTEXT.md)
+- [Product Requirements](docs/REQUIREMENTS.md)
+- [Feature Scope](docs/scope/scope.md)
+- [Architecture Context](docs/ARCHITECTURE.md)
+- [Domain Data Model](docs/DATA_MODEL.md)
+- [Safety and Privacy](docs/SAFETY_AND_PRIVACY.md)
+- [Delivery Plan](docs/DELIVERY_PLAN.md)
+- [Open Decisions](docs/OPEN_DECISIONS.md)
 - [CTO Framework](docs/CTO_FRAMEWORK.md)
 - [Architecture Decisions](docs/DECISIONS.md)
 - [Progress Log](docs/PROGRESS.md)
