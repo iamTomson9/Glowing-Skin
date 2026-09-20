@@ -1,5 +1,9 @@
 create schema if not exists private;
 
+-- Replace any earlier bootstrap that populated guessed onboarding values.
+drop trigger if exists on_auth_user_created on auth.users;
+drop function if exists public.handle_new_user();
+
 create table public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   onboarding_status text not null default 'not_started'

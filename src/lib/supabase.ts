@@ -10,13 +10,14 @@ const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
 const supabasePublishableKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
 
 export const isSupabaseConfigured = Boolean(supabaseUrl && supabasePublishableKey);
+const hasLocalStorage = typeof globalThis.localStorage !== 'undefined';
 export const supabase = isSupabaseConfigured
   ? createClient<Database>(supabaseUrl!, supabasePublishableKey!, {
       auth: {
-        storage: localStorage,
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: Platform.OS === 'web',
+        ...(hasLocalStorage ? { storage: globalThis.localStorage } : {}),
+        autoRefreshToken: hasLocalStorage,
+        persistSession: hasLocalStorage,
+        detectSessionInUrl: Platform.OS === 'web' && typeof window !== 'undefined',
       },
     })
   : null;

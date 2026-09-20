@@ -1,5 +1,11 @@
 # Authentication Setup
 
+## Connected Development Project
+
+The application is connected locally to the healthy Supabase project named `glowing-skin`. Its public URL and publishable key live only in ignored `.env.local` files. The `create_profiles` and `harden_legacy_functions` migrations are applied to the live project.
+
+Do not commit `.env.local`. Deployed environments still need the same two public variables configured in Vercel and their Auth redirect URLs approved in Supabase.
+
 ## Local Supabase
 
 1. Install Docker Desktop and start it.
@@ -34,3 +40,15 @@ Email confirmation should remain enabled for preview, staging, and production. U
 8. Confirm a signed out client cannot read `public.profiles`.
 
 Record the date, platform, expected result, and actual result in the pull request. Do not include tokens, passwords, full user IDs, or recovery links.
+
+## Verification Record, 2026-09-20
+
+- Live profile bootstrap trigger: passed with two disposable identities.
+- Owner read: one own row returned.
+- Cross account read: zero rows returned.
+- Owner update: one own row updated.
+- Cross account update: zero rows updated.
+- Anonymous read: denied before RLS because `anon` has no table grant.
+- Cleanup: both disposable identities and profiles removed.
+- Security advisors: no findings after hardening the pre-existing functions.
+- Public sign up API: blocked by the project's temporary email send rate limit. Retry after the limit resets or configure approved SMTP before inviting real users.

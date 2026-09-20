@@ -32,6 +32,10 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     const { data } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       setSession(nextSession);
+      if (!nextSession) {
+        setProfile(null);
+        setProfileError(null);
+      }
       setLoading(false);
     });
 
@@ -42,11 +46,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
   }, []);
 
   useEffect(() => {
-    if (!supabase || !session) {
-      setProfile(null);
-      setProfileError(null);
-      return;
-    }
+    if (!supabase || !session) return;
 
     let active = true;
     supabase.from('profiles').select('id, onboarding_status, created_at, updated_at').eq('id', session.user.id).single().then(({ data, error }) => {
@@ -57,7 +57,9 @@ export function AuthProvider({ children }: PropsWithChildren) {
     return () => { active = false; };
   }, [session]);
 
-  const value = useMemo(() => ({ configured: isSupabaseConfigured, loading, profile, profileError, session }), [loading, profile, profileError, session]);
+  const currentProfile = profile?.id === session?.user.id ? profile : null;
+  const currentProfileError = session ? profileError : null;
+  const value = useMemo(() => ({ configured: isSupabaseConfigured, loading, profile: currentProfile, profileError: currentProfileError, session }), [currentProfile, currentProfileError, loading, session]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

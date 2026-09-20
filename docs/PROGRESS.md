@@ -24,7 +24,15 @@
 - Added the first Supabase migration for profile bootstrap, explicit grants, owner scoped RLS, and restricted update access.
 - Added honest empty states for Today, Shelfie, and Shopping until their real database features exist.
 - Verified TypeScript, lint, static Expo web export, signed out routing, conversion page navigation, and missing configuration handling.
-- Local migration application and two account RLS verification remain blocked because Docker and hosted Supabase environment values are not available in this checkout.
+- The earlier local database blocker was resolved by connecting the authenticated Supabase integration to the hosted development project.
+- Connected the app to the healthy live Supabase project named `glowing-skin` using an ignored local environment file and its active publishable key.
+- Applied `create_profiles` to replace the earlier auth trigger that populated guessed onboarding values.
+- Applied `harden_legacy_functions` to remove unnecessary `SECURITY DEFINER` execution and fix the mutable search path reported by Supabase advisors.
+- Generated TypeScript database types from the live schema.
+- Verified the live bootstrap and RLS boundary with two disposable identities: own reads and updates succeeded, cross account operations returned zero rows, anonymous access was denied, and cleanup removed all QA records.
+- Supabase security advisors now report no findings. Public sign up remains temporarily blocked by the project's email send rate limit.
+- Fixed Supabase session storage initialization so Expo web static rendering does not access browser `localStorage` on the server.
+- Rebuilt the production PWA with the live public configuration and manually confirmed the Sign In screen reaches Supabase Auth and returns its expected invalid credentials response for a disposable nonexistent account.
 
 Security note:
 
