@@ -8,8 +8,8 @@
 
 | # | Feature | Phase | Status |
 | --- | --- | --- | --- |
-| 1 | Foundation and delivery controls | Foundation | planned |
-| 2 | Account and consent | MVP | planned |
+| 1 | Foundation and delivery controls | Foundation | in-progress |
+| 2 | Account and consent | MVP | in-progress |
 | 3 | Guided onboarding | MVP | planned |
 | 4 | Product catalog and Shelfie | MVP | planned |
 | 5 | Safe routine generation | MVP | planned |
@@ -23,7 +23,7 @@
 
 ## Foundation
 
-### 1. Foundation And Delivery Controls · planned
+### 1. Foundation And Delivery Controls · in-progress
 
 Create the approved PWA scaffold, environments, database migration workflow, CI checks, preview deployments, and branch protections.
 
@@ -36,7 +36,7 @@ Done when: a feature branch can pass all required checks and deploy a safe previ
 
 ## MVP
 
-### 2. Account And Consent · planned
+### 2. Account And Consent · in-progress · assumed decision ([spec 0001](../specs/0001-account-auth-foundation.md))
 
 Give each person a secure private account with explicit consent, recovery, export, and deletion paths.
 
@@ -44,8 +44,16 @@ Done when: a user can complete the account lifecycle and can access only their o
 
 - [ ] Design it: `/architect account and consent`
 - [ ] Build it: auth, profile bootstrap, consent, recovery, deletion
+  - [x] Email and password sign up, sign in, recovery, reset, session restore, and sign out
+  - [x] Profile bootstrap migration and owner scoped RLS
+  - [x] Consent records and screens
+  - [ ] Account export and deletion
 - [ ] Verify it: `/check verify account and consent`
 - [ ] Test it: `/test account and consent`
+
+Delivery sequence: [Development Steps, Steps 0 through 3](../DEVELOPMENT_STEPS.md)
+
+Code: `src/app/(auth)`, `src/providers/auth-provider.tsx`, `supabase/migrations`
 
 ### 3. Guided Onboarding · planned
 
@@ -57,6 +65,8 @@ Done when: a user can enter the confirmed profile, lifestyle, budget, schedule, 
 - [ ] Build it: profile, context, budget, schedule, initial inventory
 - [ ] Verify it: `/check verify guided onboarding`
 - [ ] Test it: `/test guided onboarding`
+
+Delivery sequence: [Development Steps, Steps 4 through 6](../DEVELOPMENT_STEPS.md)
 
 ### 4. Product Catalog And Shelfie · planned
 

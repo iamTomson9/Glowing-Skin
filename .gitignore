@@ -1,8 +1,10 @@
 node_modules/
 dist/
+dist-android/
 build/
 .next/
 .vercel/
+.expo/
 .env
 .env.*
 !.env.example
@@ -12,3 +14,5 @@ yarn-error.log*
 pnpm-debug.log*
 .DS_Store
 Thumbs.db
+.expo-scaffold/
+expo-scaffold/

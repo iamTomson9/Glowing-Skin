@@ -4,6 +4,11 @@
 
 This is the entry point for anyone planning, designing, building, testing, or reviewing Glowing Skin. Read this document, then follow the linked source for the area you are changing. Do not fill gaps from memory or assumption.
 
+## Active Delivery Plan
+
+- Follow [DEVELOPMENT_STEPS.md](DEVELOPMENT_STEPS.md) for the current database connected build sequence from authentication through onboarding and the first live routine.
+- No application feature may use mock user data. Honest empty states replace placeholder records until Supabase data exists.
+
 ## Product In One Sentence
 
 Glowing Skin is a budget aware skincare companion that creates and guides personalized face and body routines using the user's goals, lifestyle, location, schedule, owned products, and real usage.

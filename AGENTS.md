@@ -6,11 +6,11 @@ Glowing Skin is a budget aware face and body skincare companion. It creates guid
 
 ## Stack
 
-- **Frontend**: Progressive Web App, framework not yet selected
+- **Frontend**: Expo React Native with Expo Router and TypeScript, compatible with Expo Go and Expo web
 - **Backend**: Supabase PostgreSQL, Auth, Storage, and Row Level Security
 - **Hosting**: Vercel previews and production deployment
-- **AI provider**: Not yet approved; never call a paid or secret bearing AI API directly from the browser
-- **Package manager**: Not yet selected
+- **AI provider**: Not yet approved; never call a paid or secret bearing AI API directly from a public client
+- **Package manager**: npm with a committed lockfile
 
 ## Build approach
 
@@ -18,7 +18,14 @@ Glowing Skin is a budget aware face and body skincare companion. It creates guid
 
 ## Commands
 
-No application scaffold exists yet. Add install, development, build, lint, type check, and test commands here when the frontend stack is approved.
+```bash
+npm install
+npm start
+npm run web
+npm run lint
+npm run typecheck
+npm run build:web
+```
 
 ## Rules
 

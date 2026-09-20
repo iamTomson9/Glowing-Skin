@@ -5,7 +5,9 @@
 - PWA deployed through Vercel.
 - Supabase provides PostgreSQL, Auth, Storage where needed, and RLS.
 - The system should remain inside free tier limits during prototype and MVP.
-- The frontend framework and AI provider are not yet approved.
+- Expo React Native, Expo Router, TypeScript, and npm are approved for the universal client.
+- The project must remain compatible with Expo Go unless a later decision approves a development build.
+- The AI provider is not yet approved.
 
 ## System Boundaries
 
@@ -75,4 +77,4 @@ Production secrets and user data must never be copied into preview or local envi
 
 ## Architecture Work Still Required
 
-Before scaffolding, approve the frontend framework, TypeScript and package manager policy, backend function platform, test stack, notification strategy, analytics strategy, and AI boundary. These are tracked in `OPEN_DECISIONS.md`.
+Before backend implementation, approve the backend function platform, test stack, notification strategy, analytics strategy, and AI boundary. These are tracked in `OPEN_DECISIONS.md`.
