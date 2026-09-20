@@ -2,6 +2,8 @@
 
 The Glowing Skin MVP has 20 user facing screens. Redirects, layouts, authentication callbacks, dialogs, and confirmation sheets are not counted as screens.
 
+The branded splash is launch infrastructure and is also excluded from this count. It stays visible only while the app restores its initial session.
+
 ## Account
 
 | # | Screen | Status | Route |

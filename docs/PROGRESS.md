@@ -40,6 +40,8 @@
 - Regenerated live database types and passed type checking, lint, and the production Expo web export.
 - Verified consent RLS in a rolled back two user database test: own reads and inserts succeeded while cross account reads and inserts were rejected.
 - Supabase security advisors report no findings. Performance advisors identify three preexisting missing foreign key indexes in legacy routine and shopping tables for their owning feature work.
+- Replaced the Expo placeholder splash with the Glowing Skin mark and a matching accessible app loading state for native and web.
+- Kept splash duration tied to real session restoration, with no artificial delay, and documented that launch infrastructure is outside the 20 screen product count.
 
 Security note:
 
