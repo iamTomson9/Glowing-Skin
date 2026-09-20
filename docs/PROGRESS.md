@@ -10,7 +10,12 @@
 - Consolidated the original product discovery conversation into a canonical project context.
 - Added confirmed and proposed requirements, phased feature scope, architecture boundaries, conceptual data model, safety and privacy requirements, delivery gates, and an open decision register.
 - Added root `AGENTS.md` and `CLAUDE.md` so AI coding tools and developers begin from the same source of truth.
-- No application code has been scaffolded. The next controlled step is to resolve the blocking foundation decisions in `docs/OPEN_DECISIONS.md` and write the foundation architecture spec.
+- The original documentation baseline ended before application code was scaffolded. The first foundation implementation now follows below.
+- Began the application foundation on `feature/expo-foundation` using Expo React Native, Expo Router, TypeScript, and npm.
+- Added Expo Go compatible navigation and functional Today, Shelfie, Shopping, and Profile starter screens.
+- Added static Expo web export configuration for Vercel and an environment guarded Supabase client boundary.
+- Verified TypeScript, Expo lint, all Expo Doctor checks, static web export, Android export, browser navigation, routine completion, and the shopping interaction.
+- `npm audit --omit=dev` reports moderate advisories through Expo Router and Expo CLI dependencies. The suggested forced fixes downgrade core Expo packages and are not safe to apply. Track upstream patched releases before production.
 
 Security note:
 

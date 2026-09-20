@@ -6,7 +6,7 @@ Developers must not choose answers silently. Close a decision by recording it in
 
 | ID | Decision | Why it matters | Owner | Needed by |
 | --- | --- | --- | --- | --- |
-| OD-001 | Frontend framework, language, and package manager | Determines scaffold, routing, PWA support, typing, and test tools | CTO | Before code scaffold |
+| OD-001 | Closed in ADR-005: Expo React Native, Expo Router, TypeScript, and npm | Universal Expo Go and web foundation is now scaffolded | CTO | Closed 2026-09-20 |
 | OD-002 | Trusted function platform: Vercel Functions or Supabase Edge Functions | Prevents two backend patterns and locates provider secrets | CTO plus Backend | Before recommendation API |
 | OD-003 | Notification capability for an installable web app and supported browsers | Web push and local schedules differ by platform and permission | Frontend plus Product | Before reminder design |
 | OD-004 | Initial launch country or countries | Determines currency, catalog, privacy review, and language | Product | Before pilot data |
