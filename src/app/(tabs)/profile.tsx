@@ -1,28 +1,26 @@
-import { Bell, ChevronRight, CircleHelp, Globe2, Shield, UserRound } from 'lucide-react-native';
-import { Pressable, StyleSheet, Switch, Text, View } from 'react-native';
+import { LogOut, ShieldCheck } from 'lucide-react-native';
+import { useState } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { AuthMessage } from '@/components/auth/auth-message';
 import { Page, SectionHeader } from '@/components/page';
+import { supabase } from '@/lib/supabase';
+import { useAuth } from '@/providers/auth-provider';
 import { colors, radius, spacing, type } from '@/theme/tokens';
 
-const rows = [
-  { label: 'Skin profile', value: 'Combination · Hydration', icon: UserRound },
-  { label: 'Country and currency', value: 'Botswana · BWP', icon: Globe2 },
-  { label: 'Privacy and data', value: 'Export or delete your data', icon: Shield },
-  { label: 'Help and safety', value: 'Guidance limits and support', icon: CircleHelp },
-];
-
 export default function ProfileScreen() {
-  return <Page>
-    <Text style={styles.eyebrow}>YOUR ROUTINE SETTINGS</Text><Text style={styles.title}>Profile</Text><Text style={styles.subtitle}>Keep the plan aligned with your skin, schedule, and budget.</Text>
-    <View style={styles.profileBand}><View style={styles.avatar}><Text style={styles.avatarText}>NN</Text></View><View style={styles.profileCopy}><Text style={styles.name}>Neo N.</Text><Text style={styles.profileMeta}>Face and body care · Monthly budget</Text></View></View>
-    <SectionHeader title="Preferences" />
-    <View style={styles.list}>{rows.map(({ icon: Icon, label, value }) => <Pressable key={label} style={({ pressed }) => [styles.row, pressed && styles.pressed]}><Icon color={colors.forest} size={20} /><View style={styles.rowCopy}><Text style={styles.rowLabel}>{label}</Text><Text style={styles.rowValue}>{value}</Text></View><ChevronRight color={colors.muted} size={20} /></Pressable>)}</View>
-    <SectionHeader title="Reminders" />
-    <View style={styles.switchRow}><Bell color={colors.coral} size={20} /><View style={styles.rowCopy}><Text style={styles.rowLabel}>Routine reminders</Text><Text style={styles.rowValue}>Morning at 06:30 · Evening at 19:30</Text></View><Switch value trackColor={{ true: colors.mint }} thumbColor={colors.surface} /></View>
-    <Text style={styles.disclaimer}>Glowing Skin provides educational self care guidance. It does not diagnose or treat medical conditions.</Text>
-  </Page>;
+  const { profile, profileError, session } = useAuth();
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  async function signOut() {
+    if (!supabase) return;
+    setLoading(true); setError(null);
+    const { error: authError } = await supabase.auth.signOut();
+    setError(authError?.message ?? null); setLoading(false);
+  }
+
+  return <Page><Text style={styles.eyebrow}>ACCOUNT</Text><Text style={styles.title}>Profile</Text><Text style={styles.subtitle}>Your saved onboarding details and privacy controls will live here.</Text><View style={styles.account}><View style={styles.avatar}><Text style={styles.avatarText}>{session?.user.email?.slice(0, 1).toUpperCase() ?? '?'}</Text></View><View style={styles.accountCopy}><Text style={styles.email}>{session?.user.email}</Text><Text style={styles.meta}>{profile ? `Onboarding: ${profile.onboarding_status.replace('_', ' ')}` : 'Checking database profile'}</Text></View></View><AuthMessage text={profileError ? `Profile could not be loaded: ${profileError}` : error} /><SectionHeader title="Account status" /><View style={styles.status}><ShieldCheck color={colors.forest} size={22} /><View style={styles.statusCopy}><Text style={styles.statusTitle}>{profile ? 'Private profile connected' : 'Authentication connected'}</Text><Text style={styles.statusText}>{profile ? 'This account profile was loaded through its owner scoped database policy.' : 'The database profile will appear after the profile migration is applied.'}</Text></View></View><Pressable accessibilityRole="button" disabled={loading} onPress={signOut} style={({ pressed }) => [styles.signOut, pressed && styles.pressed]}><LogOut color={colors.coral} size={20} /><Text style={styles.signOutText}>{loading ? 'Signing out...' : 'Sign out'}</Text></Pressable><Text style={styles.disclaimer}>Glowing Skin provides educational self care guidance. It does not diagnose or treat medical conditions.</Text></Page>;
 }
 
-const styles = StyleSheet.create({
-  eyebrow: { ...type.label, color: colors.muted }, title: { ...type.display, color: colors.ink, marginTop: spacing.xs }, subtitle: { ...type.body, color: colors.muted, marginTop: spacing.sm }, profileBand: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingVertical: spacing.lg, marginTop: spacing.lg, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.line }, avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: colors.mint, alignItems: 'center', justifyContent: 'center' }, avatarText: { fontSize: 17, fontWeight: '800', color: colors.forest }, profileCopy: { flex: 1 }, name: { fontSize: 20, lineHeight: 25, fontWeight: '800', color: colors.ink }, profileMeta: { ...type.bodySmall, color: colors.muted, marginTop: 3 }, list: { gap: 1, borderRadius: radius.sm, overflow: 'hidden', borderWidth: 1, borderColor: colors.line }, row: { minHeight: 68, flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingHorizontal: spacing.md, backgroundColor: colors.surface, borderBottomWidth: 1, borderColor: colors.line }, pressed: { backgroundColor: colors.mintSoft }, rowCopy: { flex: 1 }, rowLabel: { ...type.heading, color: colors.ink }, rowValue: { ...type.caption, color: colors.muted, marginTop: 3 }, switchRow: { minHeight: 72, flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingHorizontal: spacing.md, backgroundColor: colors.surface, borderRadius: radius.sm, borderWidth: 1, borderColor: colors.line }, disclaimer: { ...type.caption, color: colors.muted, borderTopWidth: 1, borderColor: colors.line, paddingTop: spacing.md, marginTop: spacing.xl },
-});
+const styles = StyleSheet.create({ eyebrow: { ...type.label, color: colors.muted }, title: { ...type.display, color: colors.ink, marginTop: spacing.xs }, subtitle: { ...type.body, color: colors.muted, marginTop: spacing.sm }, account: { flexDirection: 'row', alignItems: 'center', gap: spacing.md, paddingVertical: spacing.lg, marginTop: spacing.lg, borderTopWidth: 1, borderBottomWidth: 1, borderColor: colors.line }, avatar: { width: 52, height: 52, borderRadius: 26, backgroundColor: colors.mint, alignItems: 'center', justifyContent: 'center' }, avatarText: { fontSize: 18, fontWeight: '800', color: colors.forest }, accountCopy: { flex: 1 }, email: { ...type.heading, color: colors.ink }, meta: { ...type.caption, color: colors.muted, marginTop: 3 }, status: { flexDirection: 'row', gap: spacing.md, backgroundColor: colors.mintSoft, borderRadius: radius.sm, padding: spacing.md }, statusCopy: { flex: 1 }, statusTitle: { ...type.heading, color: colors.forest }, statusText: { ...type.bodySmall, color: colors.forest, marginTop: 3 }, signOut: { minHeight: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: spacing.sm, borderWidth: 1, borderColor: colors.line, borderRadius: radius.xs, marginTop: spacing.xl }, pressed: { opacity: 0.7 }, signOutText: { ...type.heading, color: colors.coral }, disclaimer: { ...type.caption, color: colors.muted, lineHeight: 18, marginTop: spacing.xl } });

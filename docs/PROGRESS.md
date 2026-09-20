@@ -18,6 +18,13 @@
 - `npm audit --omit=dev` reports moderate advisories through Expo Router and Expo CLI dependencies. The suggested forced fixes downgrade core Expo packages and are not safe to apply. Track upstream patched releases before production.
 - Added `docs/DEVELOPMENT_STEPS.md` as the ordered execution plan for real Supabase backed authentication, consent, onboarding, initial inventory, routine generation, and live screen data.
 - Declared demo application arrays temporary and scheduled their removal before authentication work. Product screens must use database records or honest empty states, never mock user data.
+- Started Account and Consent on `codex/auth-foundation` from current `staging`.
+- Removed all starter user, routine, inventory, shopping, price, and progress records from application state.
+- Added simplified Sign Up, Sign In, Forgot Password, Reset Password, callback, session restore, and Sign Out flows backed only by Supabase Auth.
+- Added the first Supabase migration for profile bootstrap, explicit grants, owner scoped RLS, and restricted update access.
+- Added honest empty states for Today, Shelfie, and Shopping until their real database features exist.
+- Verified TypeScript, lint, static Expo web export, signed out routing, conversion page navigation, and missing configuration handling.
+- Local migration application and two account RLS verification remain blocked because Docker and hosted Supabase environment values are not available in this checkout.
 
 Security note:
 

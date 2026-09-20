@@ -1,0 +1,2 @@
+-- Shared reference data will be added only after product and safety review.
+-- User accounts and user owned records must never be seeded here.
