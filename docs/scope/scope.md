@@ -8,7 +8,7 @@
 
 | # | Feature | Phase | Status |
 | --- | --- | --- | --- |
-| 1 | Foundation and delivery controls | Foundation | planned |
+| 1 | Foundation and delivery controls | Foundation | in-progress |
 | 2 | Account and consent | MVP | planned |
 | 3 | Guided onboarding | MVP | planned |
 | 4 | Product catalog and Shelfie | MVP | planned |
@@ -23,7 +23,7 @@
 
 ## Foundation
 
-### 1. Foundation And Delivery Controls · planned
+### 1. Foundation And Delivery Controls · in-progress
 
 Create the approved PWA scaffold, environments, database migration workflow, CI checks, preview deployments, and branch protections.
 

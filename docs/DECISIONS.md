@@ -87,3 +87,24 @@ Consequences:
 - Recommendation runs store provenance and versions.
 - Provider selection remains an open decision.
 - Provider secrets are kept behind a trusted server boundary.
+
+## ADR-005: Use Expo For The Universal Client
+
+Date: 2026-09-20
+
+Status: Accepted
+
+Decision:
+
+Use Expo React Native with Expo Router, TypeScript, and npm. The managed project must remain compatible with Expo Go for routine development and export a static Expo web build for Vercel.
+
+Context:
+
+The user explicitly requires Expo Go support while the existing architecture requires a PWA and Vercel deployment. Expo provides Android, iOS, and web delivery from one codebase.
+
+Consequences:
+
+- Prefer Expo SDK modules and JavaScript libraries supported by Expo Go.
+- Any dependency requiring custom native code needs a separate architecture decision and development build plan.
+- Web capability must be validated separately because native and browser APIs differ.
+- Public Supabase credentials may be used by the client only with complete RLS. Privileged credentials remain server side.
