@@ -16,6 +16,8 @@
 - Added static Expo web export configuration for Vercel and an environment guarded Supabase client boundary.
 - Verified TypeScript, Expo lint, all Expo Doctor checks, static web export, Android export, browser navigation, routine completion, and the shopping interaction.
 - `npm audit --omit=dev` reports moderate advisories through Expo Router and Expo CLI dependencies. The suggested forced fixes downgrade core Expo packages and are not safe to apply. Track upstream patched releases before production.
+- Added `docs/DEVELOPMENT_STEPS.md` as the ordered execution plan for real Supabase backed authentication, consent, onboarding, initial inventory, routine generation, and live screen data.
+- Declared demo application arrays temporary and scheduled their removal before authentication work. Product screens must use database records or honest empty states, never mock user data.
 
 Security note:
 

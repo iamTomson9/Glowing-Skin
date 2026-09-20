@@ -47,6 +47,8 @@ Done when: a user can complete the account lifecycle and can access only their o
 - [ ] Verify it: `/check verify account and consent`
 - [ ] Test it: `/test account and consent`
 
+Delivery sequence: [Development Steps, Steps 0 through 3](../DEVELOPMENT_STEPS.md)
+
 ### 3. Guided Onboarding · planned
 
 Collect the minimum context needed to create a useful first routine and allow draft progress to resume.
@@ -57,6 +59,8 @@ Done when: a user can enter the confirmed profile, lifestyle, budget, schedule, 
 - [ ] Build it: profile, context, budget, schedule, initial inventory
 - [ ] Verify it: `/check verify guided onboarding`
 - [ ] Test it: `/test guided onboarding`
+
+Delivery sequence: [Development Steps, Steps 4 through 6](../DEVELOPMENT_STEPS.md)
 
 ### 4. Product Catalog And Shelfie · planned
 
