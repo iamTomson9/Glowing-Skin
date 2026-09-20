@@ -1,5 +1,5 @@
 import type { Session } from '@supabase/supabase-js';
-import { createContext, type PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, type PropsWithChildren, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import type { Database } from '@/types/database';
@@ -9,6 +9,7 @@ type AuthContextValue = {
   loading: boolean;
   profile: Database['public']['Tables']['profiles']['Row'] | null;
   profileError: string | null;
+  refreshProfile: () => Promise<void>;
   session: Session | null;
 };
 
@@ -45,9 +46,15 @@ export function AuthProvider({ children }: PropsWithChildren) {
     };
   }, []);
 
+  const refreshProfile = useCallback(async () => {
+    if (!supabase || !session) return;
+    const { data, error } = await supabase.from('profiles').select('id, onboarding_status, created_at, updated_at').eq('id', session.user.id).single();
+    setProfile(data);
+    setProfileError(error?.message ?? null);
+  }, [session]);
+
   useEffect(() => {
     if (!supabase || !session) return;
-
     let active = true;
     supabase.from('profiles').select('id, onboarding_status, created_at, updated_at').eq('id', session.user.id).single().then(({ data, error }) => {
       if (!active) return;
@@ -59,7 +66,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
   const currentProfile = profile?.id === session?.user.id ? profile : null;
   const currentProfileError = session ? profileError : null;
-  const value = useMemo(() => ({ configured: isSupabaseConfigured, loading, profile: currentProfile, profileError: currentProfileError, session }), [currentProfile, currentProfileError, loading, session]);
+  const value = useMemo(() => ({ configured: isSupabaseConfigured, loading, profile: currentProfile, profileError: currentProfileError, refreshProfile, session }), [currentProfile, currentProfileError, loading, refreshProfile, session]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

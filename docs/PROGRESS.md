@@ -33,6 +33,13 @@
 - Supabase security advisors now report no findings. Public sign up remains temporarily blocked by the project's email send rate limit.
 - Fixed Supabase session storage initialization so Expo web static rendering does not access browser `localStorage` on the server.
 - Rebuilt the production PWA with the live public configuration and manually confirmed the Sign In screen reaches Supabase Auth and returns its expected invalid credentials response for a disposable nonexistent account.
+- Defined a 20 screen MVP inventory and separated user facing screens from redirects, layouts, callbacks, dialogs, and sheets.
+- Built screen 5, Consent and Guidance Limits, with separate required data use and guidance acknowledgements plus an optional notification choice.
+- Applied the live `create_onboarding_consents` migration with append only records, version timestamps, explicit grants, owner scoped RLS, and an indexed owner query.
+- Routed incomplete accounts to onboarding and blocked direct tab access until onboarding is complete.
+- Regenerated live database types and passed type checking, lint, and the production Expo web export.
+- Verified consent RLS in a rolled back two user database test: own reads and inserts succeeded while cross account reads and inserts were rejected.
+- Supabase security advisors report no findings. Performance advisors identify three preexisting missing foreign key indexes in legacy routine and shopping tables for their owning feature work.
 
 Security note:
 

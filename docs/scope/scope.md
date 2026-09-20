@@ -46,7 +46,7 @@ Done when: a user can complete the account lifecycle and can access only their o
 - [ ] Build it: auth, profile bootstrap, consent, recovery, deletion
   - [x] Email and password sign up, sign in, recovery, reset, session restore, and sign out
   - [x] Profile bootstrap migration and owner scoped RLS
-  - [ ] Consent records and screens
+  - [x] Consent records and screens
   - [ ] Account export and deletion
 - [ ] Verify it: `/check verify account and consent`
 - [ ] Test it: `/test account and consent`

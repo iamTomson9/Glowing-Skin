@@ -5,9 +5,10 @@ import { colors } from '@/theme/tokens';
 import { useAuth } from '@/providers/auth-provider';
 
 export default function TabsLayout() {
-  const { loading, session } = useAuth();
+  const { loading, profile, session } = useAuth();
   if (!loading && !session) return <Redirect href="/sign-in" />;
   if (loading) return null;
+  if (profile?.onboarding_status !== 'complete') return <Redirect href="/onboarding/consent" />;
   return (
     <Tabs screenOptions={{ headerShown: false, tabBarActiveTintColor: colors.ink, tabBarInactiveTintColor: colors.muted, tabBarLabelStyle: { fontSize: 11, fontWeight: '700' }, tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.line, height: 68, paddingBottom: 8, paddingTop: 8 } }}>
       <Tabs.Screen name="index" options={{ title: 'Today', tabBarIcon: ({ color }) => <House color={color} size={22} /> }} />

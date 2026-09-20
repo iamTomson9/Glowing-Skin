@@ -64,6 +64,33 @@ export type Database = {
           },
         ]
       }
+      consents: {
+        Row: {
+          accepted: boolean
+          consent_type: string
+          created_at: string
+          id: string
+          user_id: string
+          version: string
+        }
+        Insert: {
+          accepted: boolean
+          consent_type: string
+          created_at?: string
+          id?: string
+          user_id: string
+          version: string
+        }
+        Update: {
+          accepted?: boolean
+          consent_type?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+          version?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           active_ingredients: string[]

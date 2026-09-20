@@ -5,9 +5,10 @@ import { useAuth } from '@/providers/auth-provider';
 import { colors } from '@/theme/tokens';
 
 export default function Index() {
-  const { loading, session } = useAuth();
+  const { loading, profile, session } = useAuth();
   if (loading) return <View style={styles.loading}><ActivityIndicator color={colors.forest} /></View>;
-  return <Redirect href={session ? '/(tabs)' : '/sign-in'} />;
+  if (!session) return <Redirect href="/sign-in" />;
+  return <Redirect href={profile?.onboarding_status === 'complete' ? '/(tabs)' : '/onboarding/consent'} />;
 }
 
 const styles = StyleSheet.create({ loading: { flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.background } });
